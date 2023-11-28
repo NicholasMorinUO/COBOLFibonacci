@@ -1,0 +1,29 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID. Fibonacci.
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+01 i PIC 9(4).
+01 n PIC 9(4).
+01 temp PIC 9(4).
+01 t1 PIC 9(4) VALUE 0.
+01 t2 PIC 9(4) VALUE 1.
+01 nextTerm PIC 9(4).
+01 userInput PIC 9(4).
+01 fibonacciSeries PIC X(100).
+PROCEDURE DIVISION.
+    DISPLAY "Enter the number of terms: ".
+    ACCEPT userInput.
+    MOVE t1 TO fibonacciSeries.
+    MOVE t1 TO fibonacciSeries(3:2).
+    MOVE t2 TO fibonacciSeries(5:4).
+    MOVE t2 TO nextTerm.
+    PERFORM VARYING i FROM 3 BY 1 UNTIL i > userInput
+        MULTIPLY i BY 4 GIVING temp
+        COMPUTE temp = temp - 3
+        MOVE nextTerm TO fibonacciSeries(temp:4)
+        COMPUTE t1 = t2
+        COMPUTE t2 = nextTerm
+        COMPUTE nextTerm = t1 + t2
+    END-PERFORM.
+    DISPLAY "Fibonacci Series: " fibonacciSeries.
+STOP RUN.
